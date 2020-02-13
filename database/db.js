@@ -40,6 +40,55 @@ const getAllListings = (callback) => {
     })
 }
 
+const getListingById = (listingId, callback) => {
+  Listing.find({listingId}, (error, data) => {
+    if (error) {
+      console.log(error);
+      callback(error, null);
+    } else {
+      console.log(data);
+      callback(null, data);
+    }
+  })
+};
+
+const createListing = (callback) => {
+  Listing.create((error, data) => {
+    if (error) {
+      console.log(error);
+      callback(error, null);
+    } else {
+      console.log(data);
+      callback(null, data);
+    }
+  })
+};
+
+const updateListing = (conditions, update, callback) => {
+  Listing.findOneAndUpdate(conditions, update, (error, data) => {
+    if (error) {
+      console.log(error);
+      callback(error, null);
+    } else {
+      console.log(data);
+      callback(null, data);
+    }
+  })
+};
+
+const deleteListing = (id, callback) => {
+  Listing.deleteOne({__id: id}, (error, data) => {
+    if (error) {
+      console.log(error);
+      callback(error, null);
+    } else {
+      console.log(data);
+      callback(null, data);
+    }
+  })
+};
+
+
 // getAllListings(()=> {})
 
 // const getListing = (id, callback) => {
@@ -58,6 +107,7 @@ const getAllListings = (callback) => {
 // getListing(8, () => {})
 
 module.exports = {Listing, getAllListings};
-
-
-
+module.exports = {Listing, getListingById};
+module.exports = {Listing, createListing};
+module.exports = {Listing, deleteListing};
+module.exports = {Listing, updateListing};
