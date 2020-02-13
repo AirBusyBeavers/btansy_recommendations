@@ -69,7 +69,7 @@ app.get('/crud', (req, res) => {
 app.put('/crud', (req, res) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  updateListing(req.body.conditions, req.body.update, (err, data) => {
+  updateListing(req.body.data.conditions, req.body.data.update, (err, data) => {
     if (err) {
       console.log(error);
       res.status(500).end();
@@ -80,7 +80,7 @@ app.put('/crud', (req, res) => {
   })
 })
 // Delete requirs an /?id=[num]
-app.put('/crud', (req, res) => {
+app.delete('/crud', (req, res) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   deleteListing(req.query.id, (err, data) => {
