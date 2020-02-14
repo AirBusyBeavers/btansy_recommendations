@@ -1,28 +1,6 @@
-API guide:
+Legacy API guide:
 
-CREATE:
-URL based API. Expects a POST request to http://localhost:3002/crud
-
-example: curl -X POST http://localhost:3002/crud
-
-READ:
-
-URL based API. Expects a GET request to http://localhost:3002/crud
-
-example: curl http://localhost:3002/crud
-
-UPDATE:
-
-Expects a PUT request. This requires that data be sent in the form of an object or an array of objects. Requests should be sent to http://localhost:3002/crud.
-
-example using jquery:
-$.ajax({
-  method: "PUT",
-  url: "http://localhost:3002/crud",
-  data: { conditions: ({} || [{}]), update: ({} || [{}]) }
-})
-
-Please adhere to the data schema:
+Schema:
 ListingSchema = new Schema({
     listingId: Number,
     recommendations: [ {
@@ -37,9 +15,67 @@ ListingSchema = new Schema({
         likedStatus: {type: Boolean},
         plusStatus: {type: Boolean}
     } ]
+});
+
+CREATE:
+Endpoint: POST http://localhost:3002/crud
+Data: none
+
+READ:
+Endpoint: GET http://localhost:3002/crud
+Data: none
+
+UPDATE:
+Endpoint: PUT http://localhost:3002/crud.
+Body: {
+  conditions: {
+    key: value
+  }
+  update: {
+    key: value
+  }
+}
 
 DELETE:
+Endpoint: DELETE http://localhost:3002/crud?id=[ID]
+Data: none. Send ID on the id parameter.
 
-URL based API. Expects a DELETE request to http://localhost:3002/crud with an id parameter that corresponds to the __id value on the listing object
+***
 
-example: curl http://localhost:3002/crud?id=[ID]
+Postgres API:
+Schema:
+  Listings: ID(int), Price(int), Type(string)
+  Recommendations: ID(int), Title(string), NumOfStars(int), LikedSatus(boolean), ListID(foriegn key)
+  Images: ID(int), URL(string), RecID(foriegn key)
+
+Create:
+Endpoint: POST http://localhost:3002/create/
+Data: {create: 'listing', price: int, type: string}
+Endpoint: POST http://localhost:3002/create/
+Data: {create: 'recommendation', title: string, numOfStars: int, likedStatus: boolean, listId: string}
+Endpoint: POST http://localhost:3002/create/
+Data: {create: 'image', url: string, redId: string}
+
+Read:
+Endpoint: GET http://localhost:3002/read
+Data: {listId: string}
+Endpoint: GET http://localhost:3002/read
+Data: {redId: string}
+Endpoint: GET http://localhost:3002/read
+Data: {imgId: string}
+
+Update:
+Endpoint: PUT http://localhost:3002/update.
+Body: {listId: string, price: int, type: string} 
+Endpoint: PUT http://localhost:3002/update.
+Body: {recId: string, title: string, numOfStars: int, likedStatus: boolean, listId: string}
+Endpoint: POST http://localhost:3002/update
+Data: {imgId: string, url: string, redId: string}
+
+Delete
+Endpoint: GET http://localhost:3002/delete
+Data: {listId: string}
+Endpoint: GET http://localhost:3002/delete
+Data: {redId: string}
+Endpoint: GET http://localhost:3002/delete
+Data: {imgId: string}
