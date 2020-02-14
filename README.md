@@ -46,72 +46,76 @@ Postgres API:
 Schema:
   Listings: ID(int), price(int), type(string), numOfBeds(int)
   Recommendations: ID(int), title(string), numOfStars(int), likedSatus(boolean), listID(foriegn key), numOfReviews(int)
-  Images: ID(int), url(string), recID(foriegn key)
+  Images: ID(int), url(string), recId(foriegn key)
 
 Create:
-Endpoint: POST http://localhost:3002/create/
-Data: {create: 'listing', price: int, type: string, numofbeds: int}
-Endpoint: POST http://localhost:3002/create/
-Data: {create: 'recommendation', title: string, numOfStars: int, likedStatus: boolean, listId: string, numOfReviews: int, numOfReviews(int)}
-Endpoint: POST http://localhost:3002/create/
-Data: {create: 'image', url: string, recId: string}
+Endpoint: POST http://localhost:3002/listing/
+Data: {price: int, type: string, numofbeds: int}
+Endpoint: POST http://localhost:3002/recommendation/
+Data: {title: string, numOfStars: int, likedStatus: boolean, listId: string, numOfReviews: int, numOfReviews(int)}
+Endpoint: POST http://localhost:3002/image/
+Data: {url: string, recId: string}
 
 Read:
-Endpoint: GET http://localhost:3002/read
-Data: {listId: string}
-Endpoint: GET http://localhost:3002/read
-Data: {redId: string}
-Endpoint: GET http://localhost:3002/read
-Data: {imgId: string}
+Send without id parameter to get all.
+Endpoint: GET http://localhost:3002/listing?id=123
+Data: none
+Endpoint: GET http://localhost:3002/recommendation?id=123
+Data: none
+Endpoint: GET http://localhost:3002/image?id=123
+Data: none
 
 Update:
-Endpoint: PUT http://localhost:3002/update.
-Body: {listId: string, price: int, type: string, numofbeds: int} 
-Endpoint: PUT http://localhost:3002/update.
-Body: {recId: string, title: string, numOfStars: int, likedStatus: boolean, listId: string, numOfReviews(int)}
-Endpoint: POST http://localhost:3002/update
-Data: {imgId: string, url: string, redId: string}
+ID parameter is required.
+Endpoint: PUT http://localhost:3002/listing?id=123.
+Body: {price: int, type: string, numofbeds: int} 
+Endpoint: PUT http://localhost:3002/recommendation?id=123.
+Body: {title: string, numOfStars: int, likedStatus: boolean, listId: string, numOfReviews(int)}
+Endpoint: POST http://localhost:3002/image?id=123
+Data: {url: string, redId: string}
 
 Delete
-Endpoint: GET http://localhost:3002/delete
-Data: {listId: string}
-Endpoint: GET http://localhost:3002/delete
-Data: {redId: string}
-Endpoint: GET http://localhost:3002/delete
-Data: {imgId: string}
+Endpoint: GET http://localhost:3002/listing?id=123
+Data: none
+Endpoint: GET http://localhost:3002/recommendation?id=123
+Data: none
+Endpoint: GET http://localhost:3002/image?id=123
+Data: none
 
 ***
 
 Cassandra Schema: listId, listPrice, listType, recId, recType, recNumOfStars, recLikedStatus, recPlusStatus, imgId, imgUrl
 
 Create:
-Endpoint: POST http://localhost:3002/create/
-Data: {create: 'listing', price: int, type: string, numofbeds: int}
-Endpoint: POST http://localhost:3002/create/
-Data: {create: 'recommendation', title: string, numOfStars: int, likedStatus: boolean, listId: string, numOfReviews: int, numOfReviews(int)}
-Endpoint: POST http://localhost:3002/create/
-Data: {create: 'image', url: string, recId: string}
+Endpoint: POST http://localhost:3002/listing/
+Data: {price: int, type: string, numofbeds: int}
+Endpoint: POST http://localhost:3002/recommendation/
+Data: {title: string, numOfStars: int, likedStatus: boolean, listId: string, numOfReviews: int, numOfReviews(int)}
+Endpoint: POST http://localhost:3002/image/
+Data: {url: string, recId: string}
 
 Read:
-Endpoint: GET http://localhost:3002/read
-Data: {listId: string}
-Endpoint: GET http://localhost:3002/read
-Data: {redId: string}
-Endpoint: GET http://localhost:3002/read
-Data: {imgId: string}
+Send without id parameter to get all.
+Endpoint: GET http://localhost:3002/listing?id=123
+Data: none
+Endpoint: GET http://localhost:3002/recommendation?id=123
+Data: none
+Endpoint: GET http://localhost:3002/image?id=123
+Data: none
 
 Update:
-Endpoint: PUT http://localhost:3002/update.
-Body: {listId: string, price: int, type: string, numofbeds: int} 
-Endpoint: PUT http://localhost:3002/update.
-Body: {recId: string, title: string, numOfStars: int, likedStatus: boolean, listId: string, numOfReviews(int)}
-Endpoint: POST http://localhost:3002/update
-Data: {imgId: string, url: string, redId: string}
+ID parameter is required.
+Endpoint: PUT http://localhost:3002/listing?id=123.
+Body: {price: int, type: string, numofbeds: int} 
+Endpoint: PUT http://localhost:3002/recommendation?id=123.
+Body: {title: string, numOfStars: int, likedStatus: boolean, listId: string, numOfReviews(int)}
+Endpoint: POST http://localhost:3002/image?id=123
+Data: {url: string, redId: string}
 
 Delete
-Endpoint: GET http://localhost:3002/delete
-Data: {listId: string}
-Endpoint: GET http://localhost:3002/delete
-Data: {redId: string}
-Endpoint: GET http://localhost:3002/delete
-Data: {imgId: string}
+Endpoint: GET http://localhost:3002/listing?id=123
+Data: none
+Endpoint: GET http://localhost:3002/recommendation?id=123
+Data: none
+Endpoint: GET http://localhost:3002/image?id=123
+Data: none
