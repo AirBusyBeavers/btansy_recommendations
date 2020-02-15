@@ -107,7 +107,7 @@ const deleteListing = (id, callback) => {
 // getListing(8, () => {})
 
 module.exports = {Listing, getAllListings};
-module.exports = {Listing, getListingById};
-module.exports = {Listing, createListing};
-module.exports = {Listing, deleteListing};
-module.exports = {Listing, updateListing};
+// module.exports = {Listing, getListingById};
+// module.exports = {Listing, createListing};
+// module.exports = {Listing, deleteListing};
+// module.exports = {Listing, updateListing};

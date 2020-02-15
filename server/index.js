@@ -2,8 +2,8 @@ const express = require('express');
 const path = require('path');
 // const {getListing} = require('../database/db.js');
 const {getAllListings} = require('../database/db.js');
-const {getListingById} = require('../database/db.js');
-const {createListing} = require('../database/db.js');
+// const {getListingById} = require('../database/db.js');
+// const {createListing} = require('../database/db.js');
 
 //Body Parser
 const bp = require('body-parser');
