@@ -50,10 +50,11 @@ SCHEMA:
     title varchar(255)
     price integer
     type varchar(255)
-    beds integer
-    stars integer
-    review integer
-    owner integer [ref: < User.id]
+    bedCount integer
+    avgStars integer
+    reviewCount integer
+    ownerUserId integer
+    plus boolean
   }
   Table Images {
     id integer [pk, unique, increment]
@@ -65,86 +66,163 @@ SCHEMA:
     primaryListId integer [ref: < Listings.id]
     secondaryListId integer [ref: < Listings.id]
   }
-  Table User {
+  Table Opinions {
     id integer [pk, unique, increment]
+    userId integer
     listingId integer [ref: < Listings.id]
     liked boolean
-    plus boolean
   }
 
 CREATE:
 
-Endpoint: POST /listing
-request body data: {title: string, price: int, type: string, beds: int, stars: int, reviews: int, owner: int}
+Endpoint: POST /listings
+request body data: {
+  title: string, 
+  price: int, 
+  type: string, 
+  bedCount: int, 
+  avgStars: int, 
+  reviewCount: int, 
+  ownerUserId: int,
+  plus: boolean
+}
 response: response code 200 or 400
 
-Endpoint: POST /image
-request body data: {url: string, listId: int}
+Endpoint: POST /images
+request body data: {
+  url: string, 
+  listId: int
+}
 response: response code 200 or 400
 
-Endpoint: POST /recommendation
-request body data: {primaryListId: int, secondaryListId: int}
+Endpoint: POST /recommendations
+request body data: {
+  primaryListId: int, 
+  secondaryListId: int
+}
 response: response code 200 or 400
 
-Endpoint: POST /user
-request body data: {listId: string, liked: boolean, plus: boolean}
+Endpoint: POST /opinions
+request body data: {
+  userId: int,
+  listId: int, 
+  liked: boolean
+}
 response: response code 200 or 400
 
 READ:
 
 Endpoint: GET /pageload?listid=123
 request body data: none
-response: all data relevant to the given list id
+response: {
+  id: int
+  title: string, 
+  price: int, 
+  type: string, 
+  bedCount: int, 
+  avgStars: int, 
+  reviewCount: int, 
+  ownerUserId: int,
+  plus:boolean,
+  imgId: int,
+  url: string,
+  recId: int,
+  primaryListId: int, 
+  secondaryListId: int,
+  userId: int,
+  liked: boolean
+}
 
-Endpoint: GET /listing?id=123
+Endpoint: GET /listings?id=123
 request body data: none
-response: listing data
+response: {
+  id: int,
+  title: string, 
+  price: int, 
+  type: string, 
+  bedCount: int, 
+  avgStars: int, 
+  reviewCount: int, 
+  ownerUserId: int,
+  plus: boolean
+}
 
-Endpoint: GET /recommendation?id=123
+Endpoint: GET /recommendations?primaryListId=123
 request body data: none
-response: recommendation data
+response: {
+  id: int,
+  primaryListId: int, 
+  secondaryListId: int
+}
 
-Endpoint: GET /image?id=123
+Endpoint: GET /images?listId=123
 request body data: none
-response: image data
+response: {
+  id: int
+  listId: int
+  url: string,
+}
 
-Endpoint: GET /user?id=123
+Endpoint: GET /opinions?listId=123
 request body data: none
-response: user data
+response: {
+  userId: int,
+  listId: int, 
+  liked: boolean
+}
 
 UPDATE:
 
-Endpoint: PUT /listing?id=123
-request body data: {title: string, price: int, type: string, beds: int, stars: int, reviews: int, owner: int}
+Endpoint: PUT /listings?id=123
+request body data: {
+  title: string, 
+  price: int, 
+  type: string, 
+  bedCount: int, 
+  avgStars: int, 
+  reviewCount: int, 
+  ownerUserId: int,
+  plus: boolean
+}
 response: response code 200 or 400
 
-Endpoint: PUT /image?id=123
-request body data: {url: string, listId: int}
+Endpoint: PUT /images?id=123
+request body data: {
+  listId: int
+  url: string,
+}
 response: response code 200 or 400
 
-Endpoint: PUT /recommendation?id=123
-request body data: {primaryListId: int, secondaryListId: int}
+Endpoint: PUT /recommendations?id=123
+request body data: {
+  primaryListId: int, 
+  secondaryListId: int
+}
 response: response code 200 or 400
 
-Endpoint: PUT /user?id=123
-request body data: {listId: string, liked: boolean, plus: boolean}
+Endpoint: PUT /optinions?id=123
+request body data: {
+  userId: int,
+  listId: int, 
+  liked: boolean
+}
 response: response code 200 or 400
 
 DELETE:
 
-Endpoint: DELETE /listing?id=123
+Endpoint: DELETE /listings?id=123
 request body data: none
 response: response code 200 or 400
 
-Endpoint: DELETE /recommendation?id=123
+Endpoint: DELETE /recommendations?id=123
 request body data: none
 response: response code 200 or 400
 
-Endpoint: DELETE /image?id=123
+Endpoint: DELETE /images?id=123
 request body data: none
 response: response code 200 or 400
 
-Endpoint: DELETE /user?id=123
+Endpoint: DELETE /opinions?id=123
 request body data: none
 response: response code 200 or 400
 
@@ -153,91 +231,168 @@ response: response code 200 or 400
 CASSANDRA API
 
 SCHEMA: 
-Table Monolith {
+Table RecommendationPageLoad {
   listId: int
-  listPrise: int
+  listPrice: int
   listType: string
+  plus: boolean
   recListId: int
   recNumOfStars: int
   imgId: int
   imgUrl: string
   userId: int
   like: boolean
-  plus: boolean
 }
 
 CREATE:
 
-Endpoint: POST /listing
-request body data: {title: string, price: int, type: string, beds: int, stars: int, reviews: int, owner: int}
+Endpoint: POST /listings
+request body data: {
+  title: string, 
+  price: int, 
+  type: string, 
+  bedCount: int, 
+  avgStars: int, 
+  reviewCount: int, 
+  ownerUserId: int,
+  plus: boolean
+}
 response: response code 200 or 400
 
-Endpoint: POST /image
-request body data: {url: string, listId: int}
+Endpoint: POST /images
+request body data: {
+  url: string, 
+  listId: int
+}
 response: response code 200 or 400
 
-Endpoint: POST /recommendation
-request body data: {primaryListId: int, secondaryListId: int}
+Endpoint: POST /recommendations
+request body data: {
+  primaryListId: int, 
+  secondaryListId: int
+}
 response: response code 200 or 400
 
-Endpoint: POST /user
-request body data: {listId: string, liked: boolean, plus: boolean}
+Endpoint: POST /opinions
+request body data: {
+  userId: int,
+  listId: int, 
+  liked: boolean
+}
 response: response code 200 or 400
 
 READ:
 
 Endpoint: GET /pageload?listid=123
 request body data: none
-response: all data relevant to the given list id
+response: {
+  id: int
+  title: string, 
+  price: int, 
+  type: string, 
+  bedCount: int, 
+  avgStars: int, 
+  reviewCount: int, 
+  ownerUserId: int,
+  plus:boolean,
+  imgId: int,
+  url: string,
+  recId: int,
+  primaryListId: int, 
+  secondaryListId: int,
+  userId: int,
+  liked: boolean
+}
 
-Endpoint: GET /listing?id=123
+Endpoint: GET /listings?id=123
 request body data: none
-response: listing data
+response: {
+  id: int,
+  title: string, 
+  price: int, 
+  type: string, 
+  bedCount: int, 
+  avgStars: int, 
+  reviewCount: int, 
+  ownerUserId: int,
+  plus: boolean
+}
 
-Endpoint: GET /recommendation?id=123
+Endpoint: GET /recommendations?primaryListId=123
 request body data: none
-response: recommendation data
+response: {
+  id: int,
+  primaryListId: int, 
+  secondaryListId: int
+}
 
-Endpoint: GET /image?id=123
+Endpoint: GET /images?listId=123
 request body data: none
-response: image data
+response: {
+  id: int
+  listId: int
+  url: string,
+}
 
-Endpoint: GET /user?id=123
+Endpoint: GET /opinions?listId=123
 request body data: none
-response: user data
+response: {
+  userId: int,
+  listId: int, 
+  liked: boolean
+}
 
 UPDATE:
 
-Endpoint: PUT /listing?id=123
-request body data: {title: string, price: int, type: string, beds: int, stars: int, reviews: int, owner: int}
+Endpoint: PUT /listings?id=123
+request body data: {
+  title: string, 
+  price: int, 
+  type: string, 
+  bedCount: int, 
+  avgStars: int, 
+  reviewCount: int, 
+  ownerUserId: int,
+  plus: boolean
+}
 response: response code 200 or 400
 
-Endpoint: PUT /image?id=123
-request body data: {url: string, listId: int}
+Endpoint: PUT /images?id=123
+request body data: {
+  listId: int
+  url: string,
+}
 response: response code 200 or 400
 
-Endpoint: PUT /recommendation?id=123
-request body data: {primaryListId: int, secondaryListId: int}
+Endpoint: PUT /recommendations?id=123
+request body data: {
+  primaryListId: int, 
+  secondaryListId: int
+}
 response: response code 200 or 400
 
-Endpoint: PUT /user?id=123
-request body data: {listId: string, liked: boolean, plus: boolean}
+Endpoint: PUT /optinions?id=123
+request body data: {
+  userId: int,
+  listId: int, 
+  liked: boolean
+}
 response: response code 200 or 400
 
 DELETE:
 
-Endpoint: DELETE /listing?id=123
+Endpoint: DELETE /listings?id=123
 request body data: none
 response: response code 200 or 400
 
-Endpoint: DELETE /recommendation?id=123
+Endpoint: DELETE /recommendations?id=123
 request body data: none
 response: response code 200 or 400
 
-Endpoint: DELETE /image?id=123
+Endpoint: DELETE /images?id=123
 request body data: none
 response: response code 200 or 400
 
-Endpoint: DELETE /user?id=123
+Endpoint: DELETE /opinions?id=123
 request body data: none
 response: response code 200 or 400
