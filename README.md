@@ -75,7 +75,7 @@ SCHEMA:
 
 CREATE:
 
-Endpoint: POST /listings
+Endpoint: POST /psql/listings
 request body data: {
   title: string, 
   price: int, 
@@ -88,21 +88,21 @@ request body data: {
 }
 response: response code 200 or 400
 
-Endpoint: POST /images
+Endpoint: POST /psql/images
 request body data: {
   url: string, 
   listId: int
 }
 response: response code 200 or 400
 
-Endpoint: POST /recommendations
+Endpoint: POST /psql/recommendations
 request body data: {
   primaryListId: int, 
   secondaryListId: int
 }
 response: response code 200 or 400
 
-Endpoint: POST /opinions
+Endpoint: POST /psql/opinions
 request body data: {
   userId: int,
   listId: int, 
@@ -112,7 +112,7 @@ response: response code 200 or 400
 
 READ:
 
-Endpoint: GET /pageload?listid=123
+Endpoint: GET /psql/pageload?listid=123
 request body data: none
 response: {
   id: int
@@ -133,7 +133,7 @@ response: {
   liked: boolean
 }
 
-Endpoint: GET /listings?id=123
+Endpoint: GET /psql/listings?id=123
 request body data: none
 response: {
   id: int,
@@ -147,7 +147,7 @@ response: {
   plus: boolean
 }
 
-Endpoint: GET /recommendations?primaryListId=123
+Endpoint: GET /psql/recommendations?primaryListId=123
 request body data: none
 response: {
   id: int,
@@ -155,7 +155,7 @@ response: {
   secondaryListId: int
 }
 
-Endpoint: GET /images?listId=123
+Endpoint: GET /psql/images?listId=123
 request body data: none
 response: {
   id: int
@@ -163,7 +163,7 @@ response: {
   url: string,
 }
 
-Endpoint: GET /opinions?listId=123
+Endpoint: GET /psql/opinions?listId=123
 request body data: none
 response: {
   userId: int,
@@ -173,7 +173,7 @@ response: {
 
 UPDATE:
 
-Endpoint: PUT /listings?id=123
+Endpoint: PUT /psql/listings?id=123
 request body data: {
   title: string, 
   price: int, 
@@ -186,21 +186,21 @@ request body data: {
 }
 response: response code 200 or 400
 
-Endpoint: PUT /images?id=123
+Endpoint: PUT /psql/images?id=123
 request body data: {
   listId: int
   url: string,
 }
 response: response code 200 or 400
 
-Endpoint: PUT /recommendations?id=123
+Endpoint: PUT /psql/recommendations?id=123
 request body data: {
   primaryListId: int, 
   secondaryListId: int
 }
 response: response code 200 or 400
 
-Endpoint: PUT /optinions?id=123
+Endpoint: PUT /psql/optinions?id=123
 request body data: {
   userId: int,
   listId: int, 
@@ -210,19 +210,19 @@ response: response code 200 or 400
 
 DELETE:
 
-Endpoint: DELETE /listings?id=123
+Endpoint: DELETE /psql/listings?id=123
 request body data: none
 response: response code 200 or 400
 
-Endpoint: DELETE /recommendations?id=123
+Endpoint: DELETE /psql/recommendations?id=123
 request body data: none
 response: response code 200 or 400
 
-Endpoint: DELETE /images?id=123
+Endpoint: DELETE /psql/images?id=123
 request body data: none
 response: response code 200 or 400
 
-Endpoint: DELETE /opinions?id=123
+Endpoint: DELETE /psql/opinions?id=123
 request body data: none
 response: response code 200 or 400
 
@@ -246,7 +246,7 @@ Table RecommendationPageLoad {
 
 CREATE:
 
-Endpoint: POST /listings
+Endpoint: POST /cassandra/listings
 request body data: {
   title: string, 
   price: int, 
@@ -259,21 +259,21 @@ request body data: {
 }
 response: response code 200 or 400
 
-Endpoint: POST /images
+Endpoint: POST /cassandra/images
 request body data: {
   url: string, 
   listId: int
 }
 response: response code 200 or 400
 
-Endpoint: POST /recommendations
+Endpoint: POST /cassandra/recommendations
 request body data: {
   primaryListId: int, 
   secondaryListId: int
 }
 response: response code 200 or 400
 
-Endpoint: POST /opinions
+Endpoint: POST /cassandra/opinions
 request body data: {
   userId: int,
   listId: int, 
@@ -283,7 +283,7 @@ response: response code 200 or 400
 
 READ:
 
-Endpoint: GET /pageload?listid=123
+Endpoint: GET /cassandra/pageload?listid=123
 request body data: none
 response: {
   id: int
@@ -304,7 +304,7 @@ response: {
   liked: boolean
 }
 
-Endpoint: GET /listings?id=123
+Endpoint: GET /cassandra/listings?id=123
 request body data: none
 response: {
   id: int,
@@ -318,7 +318,7 @@ response: {
   plus: boolean
 }
 
-Endpoint: GET /recommendations?primaryListId=123
+Endpoint: GET /cassandra/recommendations?primaryListId=123
 request body data: none
 response: {
   id: int,
@@ -326,7 +326,7 @@ response: {
   secondaryListId: int
 }
 
-Endpoint: GET /images?listId=123
+Endpoint: GET /cassandra/images?listId=123
 request body data: none
 response: {
   id: int
@@ -334,7 +334,7 @@ response: {
   url: string,
 }
 
-Endpoint: GET /opinions?listId=123
+Endpoint: GET /cassandra/opinions?listId=123
 request body data: none
 response: {
   userId: int,
@@ -344,7 +344,7 @@ response: {
 
 UPDATE:
 
-Endpoint: PUT /listings?id=123
+Endpoint: PUT /cassandra/listings?id=123
 request body data: {
   title: string, 
   price: int, 
@@ -357,21 +357,21 @@ request body data: {
 }
 response: response code 200 or 400
 
-Endpoint: PUT /images?id=123
+Endpoint: PUT /cassandra/images?id=123
 request body data: {
   listId: int
   url: string,
 }
 response: response code 200 or 400
 
-Endpoint: PUT /recommendations?id=123
+Endpoint: PUT /cassandra/recommendations?id=123
 request body data: {
   primaryListId: int, 
   secondaryListId: int
 }
 response: response code 200 or 400
 
-Endpoint: PUT /optinions?id=123
+Endpoint: PUT /cassandra/optinions?id=123
 request body data: {
   userId: int,
   listId: int, 
@@ -381,18 +381,18 @@ response: response code 200 or 400
 
 DELETE:
 
-Endpoint: DELETE /listings?id=123
+Endpoint: DELETE /cassandra/listings?id=123
 request body data: none
 response: response code 200 or 400
 
-Endpoint: DELETE /recommendations?id=123
+Endpoint: DELETE /cassandra/recommendations?id=123
 request body data: none
 response: response code 200 or 400
 
-Endpoint: DELETE /images?id=123
+Endpoint: DELETE /cassandra/images?id=123
 request body data: none
 response: response code 200 or 400
 
-Endpoint: DELETE /opinions?id=123
+Endpoint: DELETE /cassandra/opinions?id=123
 request body data: none
 response: response code 200 or 400
