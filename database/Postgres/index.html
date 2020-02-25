@@ -1,0 +1,24 @@
+<html>
+  <head>
+    <script
+    src="https://code.jquery.com/jquery-3.4.1.js"
+    integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+    crossorigin="anonymous"></script>
+  </head>
+  <body>
+      <script>
+        var helper = function() {
+          return Math.floor((Math.random() * 9999999) + 1);
+        }
+        $.ajax({
+          method: "GET",
+          url: "http://localhost:3003/pageload",
+          processData: 'true',
+          data: { listid: `${helper()}`, userid: 'none' }
+        })
+        .done(function(msg) {
+          console.log(msg);
+        });
+      </script>
+  </body>
+</html>

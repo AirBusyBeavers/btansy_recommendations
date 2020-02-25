@@ -1,0 +1,19 @@
+config:
+  target: 'http://localhost:3003'
+  processor: "./artilleryhelper.js"
+  phases:
+    - duration: 60
+      arrivalRate: 1
+    - duration: 60
+      arrivalRate: 10
+    - duration: 60
+      arrivalRate: 100
+    - duration: 60
+      arrivalRate: 200
+    - duration: 60
+      arrivalRate: 300
+scenarios:
+  - flow:
+    - function: 'x' 
+    - get:
+        url: "/pageload?listid={{ listid }}"

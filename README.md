@@ -112,8 +112,8 @@ response: response code 200 or 400
 
 READ:
 
-Endpoint: GET /psql/pageload?listid=123
-request body data: none
+Endpoint: GET /psql/pageload
+request body data: { listid: 12341234, userid: 12341 || 'none' }
 response: {
   id: int
   title: string, 
